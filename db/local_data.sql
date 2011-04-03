@@ -25,15 +25,6 @@ LOCK TABLES `ifc_bearing` WRITE;
 UNLOCK TABLES;
 
 --
--- Dumping data for table `ifc_bearing_params`
---
-
-LOCK TABLES `ifc_bearing_params` WRITE;
-/*!40000 ALTER TABLE `ifc_bearing_params` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ifc_bearing_params` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `ifc_gear`
 --
 
@@ -68,6 +59,16 @@ LOCK TABLES `ifc_tree` WRITE;
 /*!40000 ALTER TABLE `ifc_tree` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ifc_tree` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping data for table `tbl_migration`
+--
+
+LOCK TABLES `tbl_migration` WRITE;
+/*!40000 ALTER TABLE `tbl_migration` DISABLE KEYS */;
+INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES ('m000000_000000_base',1301858988),('m110403_180307_create_tree_table',1301860258),('m110403_190645_create_machine_table',1301860258),('m110403_190658_create_machine_node_table',1301860258),('m110403_190724_create_bearing_table',1301860259),('m110403_190738_create_gear_table',1301860259);
+/*!40000 ALTER TABLE `tbl_migration` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -78,4 +79,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-04-03 15:40:30
+-- Dump completed on 2011-04-03 19:51:01

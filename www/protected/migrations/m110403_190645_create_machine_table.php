@@ -8,7 +8,7 @@ class m110403_190645_create_machine_table extends CDbMigration
             "id"=>"pk",
             "note"=>"varchar(1024)",
             "tree_id"=>"int(11) NOT NULL",
-        ));
+        ),  'ENGINE=InnoDB DEFAULT CHARSET=utf8');
         $this->addForeignKey('fk_machine_ifc_tree', 'ifc_machine', 'tree_id', 
             'ifc_tree', 'id');
     }

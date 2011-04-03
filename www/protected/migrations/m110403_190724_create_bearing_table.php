@@ -12,7 +12,7 @@ class m110403_190724_create_bearing_table extends CDbMigration
                 "dout" => "int(11) NOT NULL COMMENT 'Outer diameter'",
                 "din" => "int(11) NOT NULL COMMENT 'Inner diameter'",
                 "tree_id" => "int(11) NOT NULL",
-            ));
+            ),  'ENGINE=InnoDB DEFAULT CHARSET=utf8');
             $this->addForeignKey('fk_ifc_bearing_ifc_tree', 'ifc_bearing', 'tree_id', 
                 'ifc_tree', 'id');  
 	}

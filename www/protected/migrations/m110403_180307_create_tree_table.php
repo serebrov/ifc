@@ -12,7 +12,7 @@ class m110403_180307_create_tree_table extends CDbMigration
             'level' => "integer NOT NULL COMMENT 'newsted set - level'",
             'type' => "integer NOT NULL COMMENT 'node model type'",
             'name' => "varchar(1024) NOT NULL COMMENT 'node name'",
-        ));
+        ),  'ENGINE=InnoDB DEFAULT CHARSET=utf8');
     }
 
     public function down()
