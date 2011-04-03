@@ -1,0 +1,9 @@
+#ignore netbeans project
+nbproject
+
+#ignore system folders content
+application/assets/*
+application/protected/runtime/*
+
+# exclude .gitignore files
+!.gitignore
