@@ -2,8 +2,14 @@
 nbproject
 
 #ignore system folders content
-application/assets/*
-application/protected/runtime/*
+www/assets/*
+www/files/*
+www/protected/runtime/*
+tests/unitTests/files/*
+#*.orig files created by kdiff3 after merge
+*.orig
+#*.bak files
+*.bak
 
 # exclude .gitignore files
 !.gitignore
