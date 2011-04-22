@@ -1,8 +1,8 @@
--- MySQL dump 10.11
+-- MySQL dump 10.13  Distrib 5.1.41, for debian-linux-gnu (i486)
 --
 -- Host: localhost    Database: ifc
 -- ------------------------------------------------------
--- Server version	5.0.75-0ubuntu10.5
+-- Server version	5.1.41-3ubuntu12.10
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -39,6 +39,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `ifc_machine` WRITE;
 /*!40000 ALTER TABLE `ifc_machine` DISABLE KEYS */;
+INSERT INTO `ifc_machine` (`id`, `note`, `tree_id`) VALUES (5,'A note',2),(6,'',3);
 /*!40000 ALTER TABLE `ifc_machine` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,6 +58,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `ifc_tree` WRITE;
 /*!40000 ALTER TABLE `ifc_tree` DISABLE KEYS */;
+INSERT INTO `ifc_tree` (`id`, `root`, `lft`, `rgt`, `level`, `type`, `name`) VALUES (1,1,1,6,1,0,'root'),(2,1,2,3,2,1,'Machine 1'),(3,1,4,5,2,1,'Test');
 /*!40000 ALTER TABLE `ifc_tree` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-04-03 19:51:01
+-- Dump completed on 2011-04-22 18:13:55
