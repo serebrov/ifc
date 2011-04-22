@@ -100,6 +100,8 @@ class Machine extends CActiveRecord
 		if ($this->isNewRecord) {
 			$this->tree->appendTo(Tree::getRoot());
 			$this->tree_id = $this->tree->id;
+		} else {
+			$this->tree->saveNode();
 		}
 		return parent::beforeSave();
 	}

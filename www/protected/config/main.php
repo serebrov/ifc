@@ -80,7 +80,11 @@ return array(
 			'packages' => array(
 				'ifc' => array(
 					'baseUrl' => 'js',
-					'js' => array('tree.js', 'jquery.taconite.js'),
+					'js' => array(
+						'tree.js', 
+						'jquery.taconite.js',
+						'jquery.form.js'
+					),
 					'depends' => array('jsTree', 'zii')
 				),
 				'jsTree' => array(

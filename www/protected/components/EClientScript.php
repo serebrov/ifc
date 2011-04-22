@@ -26,12 +26,13 @@ class EClientScript extends CClientScript {
 		if(empty($scripts)) {
 			return '';
 		}
+		$scripts = implode("\n",$scripts);
 		return 
-			"<taconite>\n". 
-				"<eval>\n".
-					CHtml::script(implode("\n",$scripts))."\n";
-				"</eval>\n".
-			"</taconite>\n";
+			//"<taconite>\n". 
+				"<eval>".
+					"<![CDATA[\n{$scripts}\n]]>".
+				"</eval>";
+			//"</taconite>\n";
 	}
 	
 }

@@ -10,6 +10,13 @@
 				'tree_id',
 			),
 		)); ?>
+
+		<?php echo CHtml::ajaxLink('edit', 
+			$this->createUrl('machine/updateNode', array('nid'=>$model->tree_id)), 
+				array(), array('live'=>false)
+		); ?>
+		
 	</replaceContent>
+	<?php echo Yii::app()->clientScript->renderScriptsTaconite(); ?>
 </taconite>
 

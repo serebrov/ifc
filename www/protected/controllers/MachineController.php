@@ -35,12 +35,12 @@ class MachineController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'actions'=>array('create','updateNode'),
+				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('*'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -52,12 +52,12 @@ class MachineController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	/*public function actionView($id)
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
-	}
+	}*/
 
 	/**
 	 * Displays a particular model.
@@ -68,7 +68,6 @@ class MachineController extends Controller
 		$this->renderPartial('viewNode',array(
 			'model'=>$this->loadModelFromTree($nid)
 		));
-		echo Yii::app()->clientScript->renderScriptsTaconite();	
 	}
 
 	/**
@@ -101,7 +100,7 @@ class MachineController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	/*public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
 
@@ -118,8 +117,36 @@ class MachineController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
-	}
+	}*/
 
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdateNode($nid)
+	{
+		$model=$this->loadModelFromTree($nid);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Machine']))
+		{
+			$model->attributes=$_POST['Machine'];
+			$model->tree->name=$_POST['Tree']['name'];
+			if($model->save()) {
+				$this->renderPartial('viewNode',array(
+					'model'=>$model
+				));
+				Yii::app()->end();
+			}
+		}
+
+		$this->renderPartial('update',array(
+			'model'=>$model,
+		));
+	}
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.

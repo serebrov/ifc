@@ -28,3 +28,6 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<?php Yii::app()->clientScript->registerScript('ajaxForm',
+	"$('#machine-form').ajaxForm({success: function(){ $('#ifcTree').jstree('refresh') } });"
+); ?>
