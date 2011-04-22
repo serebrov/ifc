@@ -3,14 +3,15 @@
 	<div class="tree">
 		<div id="ifcTree" class="tree-holder"></div>
 		<div class="tree-tools">
-			<?php echo CHtml::button('remove', 
-				array('onclick'=>"$('#ifcTree').jstree('remove');")); ?>
-			<?php echo CHtml::button('create', 
-				array('onclick'=>"$('#ifcTree').jstree('create');")); ?>
+			<?php echo CHtml::ajaxLink('create machine', 
+				$this->createUrl('machine/createNode', array()), 
+					array(), array('id'=>'createMachine')
+			); ?>
+			<?php //echo CHtml::button('Create Machine', 
+				//array('onclick'=>"$('#ifcTree').jstree('create');")); ?>
 		</div>
 	</div>
 	<div id="details" class="details">
-		Test
 	</div>
 </div>
 <?php  

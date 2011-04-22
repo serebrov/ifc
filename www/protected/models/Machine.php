@@ -96,6 +96,12 @@ class Machine extends CActiveRecord
 		parent::afterConstruct();
 	}
 
+	protected function beforeValidate()
+	{
+		if (!$this->tree->validate()) return false;
+		return parent::validate();
+	}
+
 	protected function beforeSave() {
 		if ($this->isNewRecord) {
 			$this->tree->appendTo(Tree::getRoot());

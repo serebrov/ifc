@@ -1,4 +1,3 @@
-
 <taconite>
 	<replaceContent select="#details">
 		<h1>Update Machine <?php echo $model->id; ?></h1>

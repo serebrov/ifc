@@ -5,9 +5,8 @@
 		<?php $this->widget('zii.widgets.CDetailView', array(
 			'data'=>$model,
 			'attributes'=>array(
-				'id',
+				'tree.name',
 				'note',
-				'tree_id',
 			),
 		)); ?>
 

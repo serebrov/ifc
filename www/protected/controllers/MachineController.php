@@ -35,7 +35,7 @@ class MachineController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','updateNode'),
+				'actions'=>array('createNode','updateNode'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -74,7 +74,7 @@ class MachineController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($parentNode = null)
+	public function actionCreateNode()
 	{
 		$model=new Machine;
 
@@ -86,11 +86,15 @@ class MachineController extends Controller
 			$model->attributes=$_POST['Machine'];
 			$model->tree->name=$_POST['Tree']['name'];
 			$model->tree->type=Tree::MACHINE;
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->save()) {
+				$this->renderPartial('viewNode',array(
+					'model'=>$model
+				));
+				Yii::app()->end();
+			}
 		}
 
-		$this->render('create',array(
+		$this->renderPartial('create',array(
 			'model'=>$model,
 		));
 	}
