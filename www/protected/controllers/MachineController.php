@@ -65,9 +65,10 @@ class MachineController extends Controller
 	 */
 	public function actionViewNode($nid)
 	{
-		$this->renderPartial('view',array(
-			'model'=>$this->loadModelFromTree($nid), false, true
+		$this->renderPartial('viewNode',array(
+			'model'=>$this->loadModelFromTree($nid)
 		));
+		echo Yii::app()->clientScript->renderScriptsTaconite();	
 	}
 
 	/**

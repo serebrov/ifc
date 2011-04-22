@@ -76,11 +76,12 @@ return array(
             ),
         ),
 		'clientScript' => array(
+			'class' => 'EClientScript',
 			'packages' => array(
 				'ifc' => array(
 					'baseUrl' => 'js',
-					'js' => array('tree.js'),
-					'depends' => array('jsTree')
+					'js' => array('tree.js', 'jquery.taconite.js'),
+					'depends' => array('jsTree', 'zii')
 				),
 				'jsTree' => array(
 					//'basePath' => 'ext.jsTree.source',
@@ -89,6 +90,17 @@ return array(
 						'jquery.jstree.js',
 						'jquery.cookie.js'
 					)
+				),
+				'zii' => array(
+					'basePath' => 'system.zii.widgets.assets',
+					'js' => array(
+						'gridview/jquery.yiigridview.js',
+						'listview/jquery.yiilistview.js'
+					),
+					'css' => array(
+						'detailview/styles.css', 'gridview/styles.css',
+						'listview/styles.css'
+					),
 				)
 			)
 		)

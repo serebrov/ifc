@@ -80,7 +80,17 @@
 		onSelectNode: function(e, data) {
 			var self = this;
 			data.rslt.obj.each(function () {
-				$.ajax({
+				$.get(
+					self.url.loadNode,
+					{ 
+						'nid' : this.id.replace("node_",""),
+						'type': $(this).attr('rel')
+					} 
+					/*success : function (data, textStatus, jqXHR) {
+						$('#details').html(data);
+					}*/
+				);
+				/*$.ajax({
 					async : false,
 					type: 'GET',
 					url: self.url.loadNode,
@@ -91,7 +101,7 @@
 					success : function (data, textStatus, jqXHR) {
 						$('#details').html(data);
 					}
-				});
+				});*/
 			});
 		},
 
