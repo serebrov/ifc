@@ -132,6 +132,23 @@ class Tree extends CActiveRecord
 		));
 	}
 
+	public function getTypeName() {
+		switch ($this->type) {
+			case self::ROOT:
+				return "root";
+			case self::MACHINE:
+				return "machine";
+			case self::MACHINE_NODE:
+				return "machine_node";
+			case self::BEARING:
+				return "bearing";
+			case self::GEAR:
+				return "gear";
+			default:
+				throw new CException(Yii::t('app', 'Unknown tree node type'));
+		}
+	}
+
 	public static function getRoot() {
 		$root = Tree::model()->findByPk(1);
 		if (!$root) {

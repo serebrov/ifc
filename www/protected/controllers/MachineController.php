@@ -30,6 +30,10 @@ class MachineController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('viewNode'),
+				'users'=>array('*'),
+			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
@@ -52,6 +56,17 @@ class MachineController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+		));
+	}
+
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionViewNode($nid)
+	{
+		$this->renderPartial('view',array(
+			'model'=>$this->loadModelFromTree($nid), false, true
 		));
 	}
 
@@ -158,6 +173,19 @@ class MachineController extends Controller
 	public function loadModel($id)
 	{
 		$model=Machine::model()->findByPk((int)$id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @param integer the ID of the model to be loaded
+	 */
+	public function loadModelFromTree($tree_id)
+	{
+		$model=Machine::model()->findByAttributes(array('tree_id'=>(int)$tree_id));
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

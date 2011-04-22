@@ -75,6 +75,23 @@ return array(
                 */
             ),
         ),
+		'clientScript' => array(
+			'packages' => array(
+				'ifc' => array(
+					'baseUrl' => 'js',
+					'js' => array('tree.js'),
+					'depends' => array('jsTree')
+				),
+				'jsTree' => array(
+					//'basePath' => 'ext.jsTree.source',
+					'baseUrl' => 'js',
+					'js' => array(
+						'jquery.jstree.js',
+						'jquery.cookie.js'
+					)
+				)
+			)
+		)
     ),
 
     // application-level parameters that can be accessed
