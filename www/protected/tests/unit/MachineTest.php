@@ -1,6 +1,6 @@
 <?php
 
-class Machine2Test extends CDbTestCase
+class MachineTest extends CDbTestCase
 {
 	public $fixtures=array(
 		//'machine2s'=>'Machine2',

@@ -38,25 +38,33 @@ class MachineNode extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('rotation_freq, tree_id', 'required'),
-			array('rotation_freq, tree_id', 'numerical', 'integerOnly'=>true),
+			array('rotation_freq', 'required'),
+			array('rotation_freq', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, rotation_freq, tree_id', 'safe', 'on'=>'search'),
 		);
 	}
 
+	public function behaviors() {
+		return array(
+			'treeBehavior' => array(
+				'class' => 'application.models.TreeNodeBehavior',
+				'nodeType' => Tree::MACHINE_NODE,
+			)
+		);
+	}
 	/**
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/*public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
 			'tree' => array(self::BELONGS_TO, 'Tree', 'tree_id'),
 		);
-	}
+	}*/
 
 	/**
 	 * @return array customized attribute labels (name=>label)

@@ -51,6 +51,7 @@ class Machine extends CActiveRecord
 		return array(
 			'treeBehavior' => array(
 				'class' => 'application.models.TreeNodeBehavior',
+				'nodeType' => Tree::MACHINE,
 			)
 		);
 	}

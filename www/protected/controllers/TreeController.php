@@ -15,6 +15,8 @@ class TreeController extends Controller
 	public function actionLoadNode($nid, $type) {
 		if ($type=='machine')
 			return $this->forward('machine/viewNode');
+		if ($type=='machine_node')
+			return $this->forward('machineNode/viewNode');
 		throw new CHttpException(404,'The requested page does not exist.');
 	}
 	

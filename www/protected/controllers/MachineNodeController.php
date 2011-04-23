@@ -59,18 +59,20 @@ class MachineNodeController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreateNode()
+	public function actionCreateNode($parent)
 	{
-		$model=new Machine;
-
+		$model=new MachineNode;
+		$parent = Machine::model()->findByPk($parent);
+		if (!$parent) {
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		}
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['MachineNode']) && isset($_POST['Tree']['name']))
+		if(isset($_POST['MachineNode']))
 		{
 			$model->attributes=$_POST['MachineNode'];
-			$model->tree->name=$_POST['Tree']['name'];
-			$model->tree->type=Tree::MACHINE_NODE;
+			$model->setParentID($parent->tree->id);
 			if($model->save()) {
 				$this->renderPartial('view',array(
 					'model'=>$model
@@ -96,10 +98,9 @@ class MachineNodeController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Machine']))
+		if(isset($_POST['MachineNode']))
 		{
 			$model->attributes=$_POST['MachineNode'];
-			$model->tree->name=$_POST['Tree']['name'];
 			if($model->save()) {
 				$this->renderPartial('view',array(
 					'model'=>$model
