@@ -27,7 +27,7 @@ class MachineController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index'),
 				'users'=>array('*'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -52,20 +52,9 @@ class MachineController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	/*public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
-	}*/
-
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
 	public function actionViewNode($nid)
 	{
-		$this->renderPartial('viewNode',array(
+		$this->renderPartial('view',array(
 			'model'=>$this->loadModelFromTree($nid)
 		));
 	}
@@ -87,7 +76,7 @@ class MachineController extends Controller
 			$model->tree->name=$_POST['Tree']['name'];
 			$model->tree->type=Tree::MACHINE;
 			if($model->save()) {
-				$this->renderPartial('viewNode',array(
+				$this->renderPartial('view',array(
 					'model'=>$model
 				));
 				Yii::app()->end();
@@ -140,7 +129,7 @@ class MachineController extends Controller
 			$model->attributes=$_POST['Machine'];
 			$model->tree->name=$_POST['Tree']['name'];
 			if($model->save()) {
-				$this->renderPartial('viewNode',array(
+				$this->renderPartial('view',array(
 					'model'=>$model
 				));
 				Yii::app()->end();
