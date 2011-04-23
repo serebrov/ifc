@@ -10,9 +10,9 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model->tree,'name'); ?>
-		<?php echo $form->textField($model->tree,'name'); ?>
-		<?php echo $form->error($model->tree,'name'); ?>
+		<?php echo $form->labelEx($model,'name'); ?>
+		<?php echo $form->textField($model,'name'); ?>
+		<?php echo $form->error($model,'name'); ?>
 	</div>
 	
 	<div class="row">

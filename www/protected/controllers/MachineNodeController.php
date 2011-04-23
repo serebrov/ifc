@@ -1,6 +1,6 @@
 <?php
 
-class MachineController extends Controller
+class MachineNodeController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -26,10 +26,6 @@ class MachineController extends Controller
 	public function accessRules()
 	{
 		return array(
-			/*array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index'),
-				'users'=>array('*'),
-			),*/
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('viewNode'),
 				'users'=>array('*'),
@@ -39,7 +35,7 @@ class MachineController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','deleteNode'),
+				'actions'=>array('deleteNode'),
 				'users'=>array('*'),
 			),
 			array('deny',  // deny all users
@@ -70,9 +66,11 @@ class MachineController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Machine']))
+		if(isset($_POST['MachineNode']) && isset($_POST['Tree']['name']))
 		{
-			$model->attributes=$_POST['Machine'];
+			$model->attributes=$_POST['MachineNode'];
+			$model->tree->name=$_POST['Tree']['name'];
+			$model->tree->type=Tree::MACHINE_NODE;
 			if($model->save()) {
 				$this->renderPartial('view',array(
 					'model'=>$model
@@ -91,30 +89,6 @@ class MachineController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	/*public function actionUpdate($id)
-	{
-		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Machine']))
-		{
-			$model->attributes=$_POST['Machine'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
-	}*/
-
-	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
-	 */
 	public function actionUpdateNode($nid)
 	{
 		$model=$this->loadModelFromTree($nid);
@@ -124,7 +98,8 @@ class MachineController extends Controller
 
 		if(isset($_POST['Machine']))
 		{
-			$model->attributes=$_POST['Machine'];
+			$model->attributes=$_POST['MachineNode'];
+			$model->tree->name=$_POST['Tree']['name'];
 			if($model->save()) {
 				$this->renderPartial('view',array(
 					'model'=>$model
@@ -148,52 +123,9 @@ class MachineController extends Controller
 		{
 			// we only allow deletion via POST request
 			$this->loadModelFromTree($nid)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			//if(!isset($_GET['ajax']))
-			//	$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-
-	/**
-	 * Lists all models.
-	 */
-	/*public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('Machine');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}*/
-
-	/**
-	 * Manages all models.
-	 */
-	/*public function actionAdmin()
-	{
-		$model=new Machine('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Machine']))
-			$model->attributes=$_GET['Machine'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}*/
-
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
-	 */
-	public function loadModel($id)
-	{
-		$model=Machine::model()->findByPk((int)$id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
 	}
 
 	/**
@@ -203,7 +135,7 @@ class MachineController extends Controller
 	 */
 	public function loadModelFromTree($tree_id)
 	{
-		$model=Machine::model()->findByAttributes(array('tree_id'=>(int)$tree_id));
+		$model=MachineNode::model()->findByAttributes(array('tree_id'=>(int)$tree_id));
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -215,7 +147,7 @@ class MachineController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='machine-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='machine-node-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

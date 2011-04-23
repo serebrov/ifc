@@ -12,7 +12,17 @@
 
 		<?php echo CHtml::ajaxLink('edit', 
 			$this->createUrl('machine/updateNode', array('nid'=>$model->tree_id)), 
-				array(), array('live'=>false)
+				array('live'=>false), array()
+		); ?>
+		<?php echo CHtml::ajaxLink('delete', 
+			$this->createUrl('machine/deleteNode', array('nid'=>$model->tree_id)), 
+				array('live'=>false, 'type'=>'POST', 
+					'success'=>"$('#ifcTree').jstree('refresh')"), array()
+			 
+		); ?>
+		<?php echo CHtml::ajaxLink('create node', 
+			$this->createUrl('machineNode/createNode', array()), 
+				array(), array('id'=>'createMachineNode')
 		); ?>
 		
 	</replaceContent>

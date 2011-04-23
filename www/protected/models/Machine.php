@@ -38,8 +38,8 @@ class Machine extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			//array('tree_id', 'required'),
-			array('tree_id', 'numerical', 'integerOnly'=>true),
+			//array('name', 'required'),
+			//array('name', 'length', 'max'=>1024),
 			array('note', 'length', 'max'=>1024),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -47,17 +47,25 @@ class Machine extends CActiveRecord
 		);
 	}
 
+	public function behaviors() {
+		return array(
+			'treeBehavior' => array(
+				'class' => 'application.models.TreeNodeBehavior',
+			)
+		);
+	}
+	
 	/**
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/*public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
 			'tree' => array(self::BELONGS_TO, 'Tree', 'tree_id'),
 		);
-	}
+	}*/
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -91,12 +99,21 @@ class Machine extends CActiveRecord
 		));
 	}
 
-	protected function afterConstruct() {
-		$this->tree = new Tree;
-		parent::afterConstruct();
+	/*public function getName() {
+		return $this->tree->name;
 	}
 
-	protected function beforeValidate()
+	public function setName($value) {
+		$this->tree->name = $value;
+	}
+
+	protected function afterConstruct() {
+		$this->tree = new Tree;
+		$this->tree->type=Tree::MACHINE;
+		parent::afterConstruct();
+	}
+*/
+	/*protected function beforeValidate()
 	{
 		if (!$this->tree->validate()) return false;
 		return parent::beforeValidate();
@@ -111,4 +128,11 @@ class Machine extends CActiveRecord
 		}
 		return parent::beforeSave();
 	}
+
+	protected function afterDelete() {
+		if (!$this->tree->deleteNode()) {
+			throw new CException('Can not delete tree node');
+		}
+		return parent::afterDelete();
+	}*/
 }
