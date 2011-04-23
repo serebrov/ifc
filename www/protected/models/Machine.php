@@ -99,7 +99,7 @@ class Machine extends CActiveRecord
 	protected function beforeValidate()
 	{
 		if (!$this->tree->validate()) return false;
-		return parent::validate();
+		return parent::beforeValidate();
 	}
 
 	protected function beforeSave() {

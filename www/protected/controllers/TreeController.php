@@ -3,7 +3,7 @@
 class TreeController extends Controller
 {
 
-	public function behaviors() {
+	/*public function behaviors() {
 		return array(
 			'EJNestedTreeActions'=>array(
 				'class'=>'ext.EJNestedTreeActions.EBehavior',
@@ -12,8 +12,8 @@ class TreeController extends Controller
 				'text'=>'name',
 			),
 		);
-	}
-	public function actions() {
+	}*/
+	/*public function actions() {
 		return array (
 			'render'=>'ext.EJNestedTreeActions.actions.Render',
 			'createnode'=>'ext.EJNestedTreeActions.actions.Createnode',
@@ -22,7 +22,7 @@ class TreeController extends Controller
 			'movenode'=>'ext.EJNestedTreeActions.actions.Movenode',
 			'copynode'=>'ext.EJNestedTreeActions.actions.Copynode',
 		);
-	}
+	}*/
 
 	public function actionData($id) {
         if ((integer)$id===0) {
