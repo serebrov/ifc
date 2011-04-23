@@ -29,5 +29,9 @@
 
 </div><!-- form -->
 <?php Yii::app()->clientScript->registerScript('ajaxForm',
-	"$('#machine-form').ajaxForm({success: function(){ $('#ifcTree').jstree('refresh') } });"
+	"$('#machine-form').ajaxForm({ success: function(responseData) { 
+		if ($(responseData).find('form').length == 0) {
+			$('#ifcTree').jstree('refresh') 
+		} 
+	}});"
 ); ?>
