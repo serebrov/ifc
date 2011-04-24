@@ -11,129 +11,96 @@
  * The followings are the available model relations:
  * @property Tree $tree
  */
-class Machine extends CActiveRecord
+class Machine extends CalcModel
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @return Machine the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+    /**
+     * Returns the static model of the specified AR class.
+     * @return Machine the static model class
+     */
+    public static function model($className=__CLASS__)
+    {
+        return parent::model($className);
+    }
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'ifc_machine';
-	}
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName()
+    {
+        return 'ifc_machine';
+    }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			//array('name', 'required'),
-			//array('name', 'length', 'max'=>1024),
-			array('note', 'length', 'max'=>1024),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, note, tree_id', 'safe', 'on'=>'search'),
-		);
-	}
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules()
+    {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return array(
+            //array('name', 'required'),
+            //array('name', 'length', 'max'=>1024),
+            array('note', 'length', 'max'=>1024),
+            // The following rule is used by search().
+            // Please remove those attributes that should not be searched.
+            array('id, note, tree_id', 'safe', 'on'=>'search'),
+        );
+    }
 
-	public function behaviors() {
-		return array(
-			'treeBehavior' => array(
-				'class' => 'application.models.TreeNodeBehavior',
-				'nodeType' => Tree::MACHINE,
-			)
-		);
-	}
-	
-	/**
-	 * @return array relational rules.
-	 */
-	/*public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'tree' => array(self::BELONGS_TO, 'Tree', 'tree_id'),
-		);
-	}*/
+    public function behaviors() {
+        return array(
+            'treeBehavior' => array(
+                'class' => 'application.models.TreeNodeBehavior',
+                'nodeType' => Tree::MACHINE,
+            )
+        );
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'note' => 'Note',
-			'tree_id' => 'Tree',
-		);
-	}
+    /**
+     * @return array relational rules.
+     */
+    /*public function relations()
+    {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'tree' => array(self::BELONGS_TO, 'Tree', 'tree_id'),
+        );
+    }*/
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels()
+    {
+        return array(
+            'id' => 'ID',
+            'note' => 'Note',
+            'tree_id' => 'Tree',
+        );
+    }
 
-		$criteria=new CDbCriteria;
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     */
+    public function search()
+    {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('note',$this->note,true);
-		$criteria->compare('tree_id',$this->tree_id);
+        $criteria=new CDbCriteria;
 
-		return new CActiveDataProvider(get_class($this), array(
-			'criteria'=>$criteria,
-		));
-	}
+        $criteria->compare('id',$this->id);
+        $criteria->compare('note',$this->note,true);
+        $criteria->compare('tree_id',$this->tree_id);
 
-	/*public function getName() {
-		return $this->tree->name;
-	}
+        return new CActiveDataProvider(get_class($this), array(
+            'criteria'=>$criteria,
+        ));
+    }
 
-	public function setName($value) {
-		$this->tree->name = $value;
-	}
-
-	protected function afterConstruct() {
-		$this->tree = new Tree;
-		$this->tree->type=Tree::MACHINE;
-		parent::afterConstruct();
-	}
-*/
-	/*protected function beforeValidate()
-	{
-		if (!$this->tree->validate()) return false;
-		return parent::beforeValidate();
-	}
-
-	protected function beforeSave() {
-		if ($this->isNewRecord) {
-			$this->tree->appendTo(Tree::getRoot());
-			$this->tree_id = $this->tree->id;
-		} else {
-			$this->tree->saveNode();
-		}
-		return parent::beforeSave();
-	}
-
-	protected function afterDelete() {
-		if (!$this->tree->deleteNode()) {
-			throw new CException('Can not delete tree node');
-		}
-		return parent::afterDelete();
-	}*/
+    public function calc() {
+        $this->cleanResult();
+    }
 }
