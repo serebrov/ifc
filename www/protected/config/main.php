@@ -85,7 +85,7 @@ return array(
                         'jquery.taconite.js',
                         'jquery.form.js'
                     ),
-                    'depends' => array('jsTree', 'zii')
+                    'depends' => array('jquery', 'jsTree', 'zii')
                 ),
                 'jsTree' => array(
                     //'basePath' => 'ext.jsTree.source',
@@ -93,7 +93,8 @@ return array(
                     'js' => array(
                         'jquery.jstree.js',
                         'jquery.cookie.js'
-                    )
+                    ),
+                    'depends' => array('jquery')
                 ),
                 'zii' => array(
                     'basePath' => 'system.zii.widgets.assets',
