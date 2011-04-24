@@ -100,12 +100,14 @@ class MachineNode extends CalcModel
     public function calc() {
         $this->cleanResult();
 
+        $this->addResult($this->name, '-', '-');
+
         $f = $this->rotation_freq / 60;
 
         $sub2 = $f / 2;
         $sub3 = $f / 3;
-        $this->addResult(number_format($f,2), 'Частота вращения:', 'Гц');
-        $this->addResult(number_format($sub2,2), 'Субгармоника:', 'Гц');
-        $this->addResult(number_format($sub3,2), 'Субгармоника:', 'Гц');
+        $this->addResult('Частота вращения:', number_format($f,2), 'Гц');
+        $this->addResult('Субгармоника:', number_format($sub2,2), 'Гц');
+        $this->addResult('Субгармоника:', number_format($sub3,2), 'Гц');
     }
 }

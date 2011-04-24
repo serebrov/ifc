@@ -100,10 +100,12 @@ class Gear extends CalcModel
     public function calc() {
         $this->cleanResult();
 
+        $this->addResult($this->name, '-', '-');
+
         $f = $this->tree->getParent()->machineNodes[0]->rotation_freq / 60;
 
         $fz = $f * $this->nteeth;
-        $this->addResult(number_format($fz,2), 'Повреждения зубчатой передачи:', 'Гц');
+        $this->addResult('Повреждения зубчатой передачи:', number_format($fz,2), 'Гц');
     }
 
 }

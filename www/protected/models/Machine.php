@@ -102,5 +102,6 @@ class Machine extends CalcModel
 
     public function calc() {
         $this->cleanResult();
+        $this->addResult($this->name, '-', '-');
     }
 }

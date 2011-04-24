@@ -2,75 +2,75 @@
 
 class CalcController extends Controller
 {
-	/**
-	 * Displays the contact page
-	 */
-	public function actionBearing()
-	{
-		$model=new CalcBearingForm;
-		if(isset($_POST['CalcBearingForm']))
-		{
-			$model->attributes=$_POST['CalcBearingForm'];
-			if($model->validate())
-			{
-				$model->calc();
-			}
-		}
+    /**
+     * Displays the contact page
+     */
+    public function actionBearing()
+    {
+        $model=new CalcBearingForm;
+        if(isset($_POST['CalcBearingForm']))
+        {
+            $model->attributes=$_POST['CalcBearingForm'];
+            if($model->validate())
+            {
+                $model->calc();
+            }
+        }
 
         $format = Yii::app()->request->getParam('format');
         if (isset($format) && $format == 'csv') {
             $this->renderCsv($model->getResult());
         } else {
-    		$this->render('bearing',array('model'=>$model));
+            $this->render('bearing',array('model'=>$model));
         }
-	}
+    }
 
     public function actionGear()
-	{
-		$model=new CalcGearForm;
-		if(isset($_POST['CalcGearForm']))
-		{
-			$model->attributes=$_POST['CalcGearForm'];
-			if($model->validate())
-			{
-				$model->calc();
-			}
-		}
+    {
+        $model=new CalcGearForm;
+        if(isset($_POST['CalcGearForm']))
+        {
+            $model->attributes=$_POST['CalcGearForm'];
+            if($model->validate())
+            {
+                $model->calc();
+            }
+        }
 
         $format = Yii::app()->request->getParam('format');
         if (isset($format) && $format == 'csv') {
             $this->renderCsv($model->getResult());
         } else {
-    		$this->render('gear',array('model'=>$model));
+            $this->render('gear',array('model'=>$model));
         }
-	}
+    }
 
     public function actionSub()
-	{
-		$model=new CalcSubForm;
-		if(isset($_POST['CalcSubForm']))
-		{
-			$model->attributes=$_POST['CalcSubForm'];
-			if($model->validate())
-			{
-				$model->calc();
-			}
-		}
+    {
+        $model=new CalcSubForm;
+        if(isset($_POST['CalcSubForm']))
+        {
+            $model->attributes=$_POST['CalcSubForm'];
+            if($model->validate())
+            {
+                $model->calc();
+            }
+        }
 
         $format = Yii::app()->request->getParam('format');
         if (isset($format) && $format == 'csv') {
             $this->renderCsv($model->getResult());
         } else {
-    		$this->render('sub',array('model'=>$model));
+            $this->render('sub',array('model'=>$model));
         }
-	}
+    }
 
     protected function renderCsv($data) {
         Yii::import('ext.CSVExport');
         // create a function in your model like search() that would return
         // a CSqlDataProvider object
         //$provider = new CArrayDataProvider($data);
-        
+
         $csv = new CSVExport($data);
 
         // some options are

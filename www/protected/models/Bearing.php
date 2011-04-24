@@ -114,20 +114,22 @@ class Bearing extends CalcModel
     public function calc() {
         $this->cleanResult();
 
+        $this->addResult($this->name, '-', '-');
+
         $f = $this->tree->getParent()->machineNodes[0]->rotation_freq / 60;
         $fsep = 0;
         $dsr = ($this->dout + $this->din ) / 2;
         $fnk = 0.5 * $this->nre * $f * (1 - $this->dre * cos($this->beta) / $dsr);
-        $this->addResult(number_format($fnk,2), 'Повреждения наружного кольца:', 'Гц');
+        $this->addResult('Повреждения наружного кольца:', number_format($fnk,2), 'Гц');
 
         $fvk = 0.5 * $this->nre * $f * (1 + $this->dre * cos($this->beta) / $this->dout);
-        $this->addResult(number_format($fvk,2), 'Повреждения внутреннего кольца:', 'Гц');
+        $this->addResult('Повреждения внутреннего кольца:', number_format($fvk,2), 'Гц');
 
         $ftk = ( 0.5 * $dsr * $f / $this->dre ) * (1 - ( $this->dre * cos($this->beta) / $dsr) * ( $this->dre * cos($this->beta) / $dsr) );
-        $this->addResult(number_format($ftk, 2), 'Повреждения тел качения:', 'Гц');
+        $this->addResult('Повреждения тел качения:', number_format($ftk, 2), 'Гц');
 
         $fsep = 0.5 * $f * ( 1 - ( $this->dre * cos($this->beta) / $dsr) );
-        $this->addResult(number_format($fsep, 2), 'Повреждения сепаратора:', 'Гц');
+        $this->addResult('Повреждения сепаратора:', number_format($fsep, 2), 'Гц');
 
     }
 }

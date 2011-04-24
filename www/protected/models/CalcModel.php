@@ -14,8 +14,8 @@ abstract class CalcModel extends CActiveRecord
         $this->_result = array();
     }
 
-    protected function addResult($value, $message, $unit) {
-        $this->_result[] = array($value, $message, $unit);
+    protected function addResult($message, $value, $unit) {
+        $this->_result[] = array($message, $value, $unit);
     }
 
     public function calcAll() {
@@ -26,7 +26,6 @@ abstract class CalcModel extends CActiveRecord
               $model->calc();
               $this->_result = array_merge($this->_result,
                   array(array('-','-','-')),
-                  array(array('-',$child->name,'-')),
                   $model->getResult()
               );
            }
