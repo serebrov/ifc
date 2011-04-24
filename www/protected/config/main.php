@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-    'name'=>'My Web Application',
+    'name'=>'IFC',
 
     // preloading 'log' component
     'preload'=>array('log'),
@@ -75,39 +75,39 @@ return array(
                 */
             ),
         ),
-		'clientScript' => array(
-			'class' => 'EClientScript',
-			'packages' => array(
-				'ifc' => array(
-					'baseUrl' => 'js',
-					'js' => array(
-						'tree.js', 
-						'jquery.taconite.js',
-						'jquery.form.js'
-					),
-					'depends' => array('jsTree', 'zii')
-				),
-				'jsTree' => array(
-					//'basePath' => 'ext.jsTree.source',
-					'baseUrl' => 'js',
-					'js' => array(
-						'jquery.jstree.js',
-						'jquery.cookie.js'
-					)
-				),
-				'zii' => array(
-					'basePath' => 'system.zii.widgets.assets',
-					'js' => array(
-						'gridview/jquery.yiigridview.js',
-						'listview/jquery.yiilistview.js'
-					),
-					'css' => array(
-						'detailview/styles.css', 'gridview/styles.css',
-						'listview/styles.css'
-					),
-				)
-			)
-		)
+        'clientScript' => array(
+            'class' => 'EClientScript',
+            'packages' => array(
+                'ifc' => array(
+                    'baseUrl' => 'js',
+                    'js' => array(
+                        'tree.js',
+                        'jquery.taconite.js',
+                        'jquery.form.js'
+                    ),
+                    'depends' => array('jsTree', 'zii')
+                ),
+                'jsTree' => array(
+                    //'basePath' => 'ext.jsTree.source',
+                    'baseUrl' => 'js',
+                    'js' => array(
+                        'jquery.jstree.js',
+                        'jquery.cookie.js'
+                    )
+                ),
+                'zii' => array(
+                    'basePath' => 'system.zii.widgets.assets',
+                    'js' => array(
+                        'gridview/jquery.yiigridview.js',
+                        'listview/jquery.yiilistview.js'
+                    ),
+                    'css' => array(
+                        'detailview/styles.css', 'gridview/styles.css',
+                        'listview/styles.css'
+                    ),
+                )
+            )
+        )
     ),
 
     // application-level parameters that can be accessed
