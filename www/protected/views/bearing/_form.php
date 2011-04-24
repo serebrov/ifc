@@ -29,7 +29,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'beta'); ?>
-		<?php echo $form->textField($model,'beta'); ?>
+        <?php echo $form->dropDownList($model,'beta', Bearing::$BETA_OPTIONS); ?>
 		<?php echo $form->error($model,'beta'); ?>
 	</div>
 	

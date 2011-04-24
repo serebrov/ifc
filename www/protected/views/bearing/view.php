@@ -22,5 +22,8 @@
 		); ?>
 		
 	</replaceContent>
+	<replaceContent select="#result">
+		<?php $this->renderPartial('application.views.site._result', compact('model')); ?>
+	</replaceContent>
 	<?php echo Yii::app()->clientScript->renderScriptsTaconite(); ?>
 </taconite>

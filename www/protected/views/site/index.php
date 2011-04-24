@@ -13,6 +13,8 @@
 	</div>
 	<div id="details" class="details">
 	</div>
+	<div id="result" class="result">
+	</div>
 </div>
 <?php  
 	Yii::app()->clientScript->registerScript('buildTree',

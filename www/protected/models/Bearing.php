@@ -17,6 +17,11 @@
  */
 class Bearing extends CActiveRecord
 {
+	
+    public static $BETA_OPTIONS = array(0, 12, 15, 18, 19, 20, 24, 25, 26, 30, 35, 36, 40);
+
+    private $_result = array();
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Bearing the static model class
@@ -76,13 +81,11 @@ class Bearing extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'dre' => 'Dre',
-			'nre' => 'Nre',
-			'beta' => 'Beta',
-			'dout' => 'Dout',
-			'din' => 'Din',
-			'tree_id' => 'Tree',
+			'dre'=>'Диаметр тел качения, мм',
+            'nre'=>'Число тел качения',
+            'beta'=>'Угол контакта, °',
+            'dout'=>'Внешний диаметр подшипника, мм',
+            'din'=>'Внутренний диаметр подшипника, мм',
 		);
 	}
 
@@ -109,4 +112,36 @@ class Bearing extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function getResult() {
+        return $this->_result;
+    }
+
+    public function calc() {
+        $this->cleanResult();
+
+        $f = $this->tree->getParent()->machineNodes[0]->rotation_freq / 60;
+        $fsep = 0;
+        $dsr = ($this->dout + $this->din ) / 2;
+        $fnk = 0.5 * $this->nre * $f * (1 - $this->dre * cos($this->beta) / $dsr);
+        $this->addResult(number_format($fnk,2), 'Повреждения наружного кольца', 'Гц');
+
+        $fvk = 0.5 * $this->nre * $f * (1 + $this->dre * cos($this->beta) / $this->dout);
+        $this->addResult(number_format($fvk,2), 'Повреждения внутреннего кольца', 'Гц');
+
+        $ftk = ( 0.5 * $dsr * $f / $this->dre ) * (1 - ( $this->dre * cos($this->beta) / $dsr) * ( $this->dre * cos($this->beta) / $dsr) );
+        $this->addResult(number_format($ftk, 2), 'Повреждения тел качения', 'Гц');
+
+        $fsep = 0.5 * $f * ( 1 - ( $this->dre * cos($this->beta) / $dsr) );
+        $this->addResult(number_format($fsep, 2), 'Повреждения сепаратора', 'Гц');
+        
+}
+
+    protected function cleanResult() {
+        $this->_result = array();
+    }
+
+    protected function addResult($value, $message, $unit) {
+        $this->_result[] = array($value, $message, $unit);
+    }
 }
