@@ -38,25 +38,33 @@ class Gear extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nteeth, tree_id', 'required'),
-			array('nteeth, tree_id', 'numerical', 'integerOnly'=>true),
+			array('nteeth', 'required'),
+			array('nteeth', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, nteeth, tree_id', 'safe', 'on'=>'search'),
 		);
 	}
 
+	public function behaviors() {
+		return array(
+			'treeBehavior' => array(
+				'class' => 'application.models.TreeNodeBehavior',
+				'nodeType' => Tree::GEAR,
+			)
+		);
+	}
 	/**
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/*public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
 			'tree' => array(self::BELONGS_TO, 'Tree', 'tree_id'),
 		);
-	}
+	}*/
 
 	/**
 	 * @return array customized attribute labels (name=>label)

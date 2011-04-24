@@ -42,25 +42,33 @@ class Bearing extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('dre, nre, beta, dout, din, tree_id', 'required'),
-			array('dre, nre, beta, dout, din, tree_id', 'numerical', 'integerOnly'=>true),
+			array('dre, nre, beta, dout, din', 'required'),
+			array('dre, nre, beta, dout, din', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, dre, nre, beta, dout, din, tree_id', 'safe', 'on'=>'search'),
 		);
 	}
 
+	public function behaviors() {
+		return array(
+			'treeBehavior' => array(
+				'class' => 'application.models.TreeNodeBehavior',
+				'nodeType' => Tree::BEARING,
+			)
+		);
+	}
 	/**
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/*public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
 			'tree' => array(self::BELONGS_TO, 'Tree', 'tree_id'),
 		);
-	}
+	}*/
 
 	/**
 	 * @return array customized attribute labels (name=>label)

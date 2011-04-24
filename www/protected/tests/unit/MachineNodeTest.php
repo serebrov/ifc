@@ -21,16 +21,16 @@ class MachineNodeTest extends CDbTestCase
 	}
 
 	public function testDelete() {
-		$machine = new MachineNode;
-		$machine->attributes = array('name'=>'tree test', 'rotation_freq'=>3000);
-		$this->assertTrue($machine->save());
+		$machineNode = new MachineNode;
+		$machineNode->attributes = array('name'=>'tree test', 'rotation_freq'=>3000);
+		$this->assertTrue($machineNode->save());
 
-		$machineID = $machine->id;
-		$treeID = $machine->tree->id;
+		$machineNodeID = $machineNode->id;
+		$treeID = $machineNode->tree->id;
 
-		$machine->delete();
+		$machineNode->delete();
 
-		$this->assertNull(Machine::model()->findByPk($machineID));
+		$this->assertNull(MachineNode::model()->findByPk($machineNodeID));
 		$this->assertNull(Tree::model()->findByPk($treeID));
 	} 
 }
