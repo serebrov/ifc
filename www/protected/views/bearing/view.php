@@ -6,27 +6,19 @@
 			'data'=>$model,
 			'attributes'=>array(
 				'tree.name',
-				'rotation_freq',
+				'dre', 'nre', 'beta', 'dout', 'din'
 			),
 		)); ?>
 
 		<?php echo CHtml::ajaxLink('edit', 
-			$this->createUrl('machineNode/updateNode', array('nid'=>$model->tree_id)), 
+			$this->createUrl('bearing/updateNode', array('nid'=>$model->tree_id)), 
 				array('live'=>false), array()
 		); ?>
 		<?php echo CHtml::ajaxLink('delete', 
-			$this->createUrl('machineNode/deleteNode', array('nid'=>$model->tree_id)), 
+			$this->createUrl('bearing/deleteNode', array('nid'=>$model->tree_id)), 
 				array('live'=>false, 'type'=>'POST', 
 					'success'=>"$('#ifcTree').jstree('refresh')"), array()
 			 
-		); ?>
-		<?php  echo CHtml::ajaxLink('create bearing', 
-			$this->createUrl('bearing/createNode', array('parent'=>$model->id)), 
-				array(), array('id'=>'createBearing')
-		); ?>
-		<?php  echo CHtml::ajaxLink('create gear', 
-			$this->createUrl('gear/createNode', array('parent'=>$model->id)), 
-				array(), array('id'=>'createGear')
 		); ?>
 		
 	</replaceContent>

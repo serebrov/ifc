@@ -17,6 +17,10 @@ class TreeController extends Controller
 			return $this->forward('machine/viewNode');
 		if ($type=='machine_node')
 			return $this->forward('machineNode/viewNode');
+		if ($type=='bearing')
+			return $this->forward('bearing/viewNode');
+		if ($type=='gear')
+			return $this->forward('gear/viewNode');
 		throw new CHttpException(404,'The requested page does not exist.');
 	}
 	
