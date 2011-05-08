@@ -1,4 +1,8 @@
-fileName = '100inp.prn'
+import sys
+
+#fileName = '100inp.prn'
+
+fileName = sys.argv[1]
 # fileNameOut = '100inp.out'
 
 f = open(fileName,'rt')

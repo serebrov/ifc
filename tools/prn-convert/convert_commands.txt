@@ -1,0 +1,10 @@
+python conv_prn.py 100inp.prn  > 100inp.txt
+python conv_prn.py 100out.prn  > 100out.txt
+python conv_prn.py 200out.prn  > 200out.txt
+python conv_prn.py 200inp.prn  > 200inp.txt
+python conv_prn.py 500inp.prn  > 500inp.txt
+python conv_prn.py 500out.prn  > 500out.txt
+python conv_prn.py 700inp.prn  > 700inp.txt
+python conv_prn.py 700out.prn  > 700out.txt
+python conv_prn.py 900inp.prn  > 900inp.txt
+python conv_prn.py 900out.prn  > 900out.txt
